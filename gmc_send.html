@@ -1,0 +1,781 @@
+<!doctype html>
+<html>
+<head>
+	<title>GmcWallet</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="https://wallet.gemmymusic.com/css/reset.css">
+	<link rel="stylesheet" href="https://wallet.gemmymusic.com/css/common.css">
+	<script type="text/javascript" src="https://wallet.gemmymusic.com/js/jquery-1.11.2.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://wallet.gemmymusic.com/js/modernizr.custom.39786.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://wallet.gemmymusic.com/js/response.js" charset="utf-48"></script>
+	<script type="text/javascript" src="https://wallet.gemmymusic.com/js/icheck.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://wallet.gemmymusic.com/js/sb_common.js" charset="utf-8"></script>
+    
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"><\/script>')</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<!-- bootstrap.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+
+<!-- fancy -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" media="screen">
+
+<!-- lazyload.js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+<!-- clipboard.js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.1/clipboard.min.js"></script>
+
+<!-- toastr.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+<!-- jquery.validation -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+
+<!-- font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- datepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css"><!-- https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script><!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.ko.min.js"></script>-->
+
+<!-- date time picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+<!-- multi select -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+<!-- web3 -->
+        <script src="https://wallet.gemmymusic.com/web3.js"></script>
+
+
+
+<!-- highlight.js -->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/androidstudio.min.css">-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>-->
+<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+	<script type="text/javascript">
+
+		function fn_change_lang(str) {
+
+			var formAll = "mode=setting_lang&sel_lang="+str;
+			console.log(formAll);
+
+			$.post("profile_proc", formAll, function (response) {
+				var jsonObj = response; //var jsonObj = JSON.parse(response);
+				console.log("========== jsonObj ========== ");
+				console.log(jsonObj);
+
+				toastr.info("Success", 'Info', {
+					"closeButton": true,
+					"progressBar": false,
+					"timeOut": "2000",
+					"positionClass": "toast-top-center",
+				});
+				location.reload();
+			});
+		}
+
+    $(document).ready(function(){
+        $(".lang").on("click",function(){
+        	$(this).find(".lang_down").stop().slideToggle(250);
+        });
+
+        $(".lang").on("mouseleave",function(){
+        	$(this).find(".lang_down").stop().slideUp(250);
+        });
+    });
+</script>
+
+<!--custom--->
+<style>
+.send h2 { font-weight:600; }
+
+.left_area label span { display:block; color:#ef562d; }
+
+
+</style>
+
+<!--//custom-->
+</head>
+
+<body>
+
+    <div id="wrap">
+    
+    <!-- header -->
+    <div class="gnb_cover"></div>
+    <div class="header_wrap">
+        <div class="header clfx">
+            <div class="logo"><a href="/"><img src="https://wallet.gemmymusic.com/img/logo.png" alt="GMC"></a></div>
+    
+            <div class="gnb_open"><a href="#"><img src="https://wallet.gemmymusic.com/img/gnb_menu.png" alt="메뉴 열기"></a></div>
+    
+            <div class="gnb">
+                <ul class="clfx">
+                    <li><a href="/">지갑</a></li>
+                                        <li><a href="/send">전송</a></li>
+                                    <li><a href="/receive">받기</a></li>
+                    <li><a href="/exchange">구매</a></li>
+                    <li><a href="/profile">프로파일</a></li>
+                    <li><a href="/transactions">거래</a></li>
+                                    <li class="mb_btn lang">
+                        <a class="lang_btn" href="#none">LANGUAGE</a>
+                        <ul class="lang_down">
+                            <ol><a href="javascript:fn_change_lang('KO');">KOR</a></ol>
+                            <ol><a href="javascript:fn_change_lang('EN');">ENG</a></ol>
+                            <ol><a href="javascript:fn_change_lang('CN');">CHN</a></ol>
+                            <ol><a href="javascript:fn_change_lang('JP');">JPN</a></ol>
+                        </ul>
+                    </li>
+                    <li class="mb_btn"><a href="/auth/logout_proc.php">LOG OUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //header -->
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <style>
+        #project-label { display: block; font-weight: bold; margin-bottom: 1em; }
+        #project-icon {
+          float: left;
+          height: 32px;
+          width: 32px;
+        }
+        #project-description {
+          margin: 0;
+          padding: 0;
+        }
+        </style>
+        <script type="text/javascript" src="https://wallet.gemmymusic.com/js/jquery-ui-autocom.min.js" charset="utf-8"></script>
+        
+        
+        <script>
+    
+            var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+    
+            function fn_refresh_list() {
+                // for real
+                $("#add_body").empty();
+                var formAll = $("#frm4").serialize();
+                $.post("send_proc", formAll, function (response) {
+                    var jsonObj = response; //var jsonObj = JSON.parse(response);
+                    console.log("========== jsonObj ========== ");
+                    console.log(jsonObj);
+    
+                    if (jsonObj.result == true || jsonObj.result == "SUCCESS") {
+    
+                        var idxTxt = response.data.idxTxt;						// name
+                        var nameTxt = response.data.nameTxt;						// name
+                        var addressTxt = response.data.addressTxt;					// walletaddress
+    
+                        if (idxTxt != undefined && idxTxt != '') {					// 맨 마지막 , 제거
+                            idxTxt = idxTxt.substring(0, idxTxt.length - 1);
+                        }
+    
+                        if (nameTxt != undefined && nameTxt != '') {					// 맨 마지막 , 제거
+                            nameTxt = nameTxt.substring(0, nameTxt.length - 1);
+                        }
+    
+                        if (addressTxt != undefined && addressTxt != '') {			// 맨 마지막 , 제거
+                            addressTxt = addressTxt.substring(0, addressTxt.length - 1);
+                        }
+    
+                        var idxSplit = idxTxt.split(",");							// name 값 ,로 Split
+                        var nameSplit = nameTxt.split(",");							// name 값 ,로 Split
+                        var addressSplit = addressTxt.split(",");					// address 값 ,로 Split
+    
+                        var setHtml = "";
+    
+                        if (nameTxt != "") {
+                            if (nameSplit != null && nameSplit.length > 0) {				// Address book list Script 생성
+                                for (var i = 0; i < nameSplit.length; i++) {
+                                    setHtml += "<li>";
+                                    setHtml += "	<div class='name'><a href='#none' onClick=\"fn_apply_address('" + addressSplit[i] + "');return false;\" >" + nameSplit[i] + "</a></div>";
+                                    setHtml += "	<address>" + addressSplit[i] + "</address>";
+                                    setHtml += "	<div class='close'>";
+                                    setHtml += "		<a href='#none' onClick=\"fn_remove_tr('"+idxSplit[i]+"');\"><img src='../img/popup_close_1.gif' alt='delete' /></a>";
+                                    setHtml += "	</div>";
+                                    setHtml += "</li>";
+                                }
+                            }
+                        }
+    
+                        $("#add_body").html('');									// 기존 list 초기화
+                        $("#add_body").append(setHtml);								// 생성된 list 추가
+    
+                        if (jsonObj.message != undefined) {
+                            toastr.info(jsonObj.message, 'Info', {
+                                "closeButton": true,
+                                "progressBar": false,
+                                "timeOut": "2000",
+                                "positionClass": "toast-top-center",
+                            });
+                        }
+    
+                    } else {
+                        if (jsonObj.message != undefined) {
+                            toastr.error(jsonObj.message, 'Error', {
+                                "closeButton": true,
+                                "progressBar": false,
+                                "timeOut": "2000",
+                                "positionClass": "toast-bottom-center",
+                            });
+                        }
+                        if (jsonObj.message != undefined) {
+                            alert(jsonObj.message);
+                        }
+                    }
+    
+                });
+            }
+    
+            function fn_add_row() {
+    
+                if( $("#name").val() == "" ){
+                    alert("Please enter a nickname to save.");
+                    $("#name").focus();
+                    return false;
+                }
+    
+                if( $("#walletaddress").val() == "" ){
+                    alert("Please enter your wallet address to save.");
+                    $("#walletaddress").focus();
+                    return false;
+                }
+    
+                // for real
+                var formAll = $("#frm2").serialize();
+                $.post("send_proc", formAll, function (response) {
+                    var jsonObj = response; //var jsonObj = JSON.parse(response);
+                    console.log("========== jsonObj ========== ");
+                    console.log(jsonObj);
+    
+                    if (jsonObj.message != undefined) {
+                        toastr.info(jsonObj.message, 'Info', {
+                            "closeButton": true,
+                            "progressBar": false,
+                            "timeOut": "2000",
+                            "positionClass": "toast-top-center",
+                        });
+                    }
+    
+    
+                    var setHtml = "";
+                    setHtml += "<li>";
+                    setHtml += "<div class='name'>"+$("input[name=name]").val()+"</div>";
+                    setHtml += "<address>"+$("input[name=walletaddress]").val()+"</address>";
+                    setHtml += "<div class='close'><a href='#none' onClick=\"fn_remove_tr('"+jsonObj.account+"');\"><img src='../img/popup_close_1.gif' alt='delete' /></a></div>";
+                    setHtml += "</li>";
+    
+                    $("#add_body").prepend(setHtml);
+    
+                    // 입력 값 초기화
+                    $("input[name=name]").val('');
+                    $("input[name=walletaddress]").val('');
+    
+                    // Address book 리스트 갱신
+                    fn_refresh_list();
+                });
+    
+            }
+    
+            function fn_remove_tr(acnt) {
+    
+                if (confirm("삭제하시겠습니까?")) {
+                    $("input[name=deleteNameVal]").val(acnt);
+    
+                    // for real
+                    var formAll = $("#frm3").serialize();
+                    $.post("send_proc", formAll, function (response) {
+                        var jsonObj = response; //var jsonObj = JSON.parse(response);
+                        console.log("========== jsonObj ========== ");
+                        console.log(jsonObj);
+    
+                        if (jsonObj.message != undefined) {
+                            toastr.info(jsonObj.message, 'Info', {
+                                "closeButton": true,
+                                "progressBar": false,
+                                "timeOut": "2000",
+                                "positionClass": "toast-top-center",
+                            });
+                        }
+    
+                        // Address book 리스트 갱신
+                        fn_refresh_list();
+    
+                    });
+    
+                }
+    
+            }
+    
+            function fn_apply_address(address) {
+                if (confirm('Do you want to apply this address?')) {
+                    $("input[name=toaddress]").val(address);
+                    popup_close('.address_book_pop');
+                }
+            }
+    
+            var memList = [];
+            $(document).ready(function(){
+                $( "#schTxt" ).autocomplete({
+                    minLength : 0,
+                    source: memList,
+                    select: function( event, ui ) {
+                        console.log(ui.item.value);
+                        console.log(ui.item.desc);
+                        var cutValue = ui.item.value.split(", ");
+                        $("#name").val(cutValue[0]);
+                        $("#walletaddress").val(ui.item.desc);
+                      return false;
+                    }
+                });
+            });
+    
+            function addrSearch(){
+                if($("#schTxt").val().length > 3){
+                    $.post("send_proc",
+                            "mode=addrSearch&schTxt="+$("#schTxt").val(),
+                    function (response) {
+                        var jsonObj = response;
+                        if(jsonObj.data.dataList != undefined ){
+                            memList = jsonObj.data.dataList;
+                            $("#schTxt").autocomplete("option","source",memList);
+                            $("#schTxt").autocomplete("search");
+                        }
+                    });
+                }
+            }
+    
+            var smsSendNumber = "";
+            function send_sms(){
+    
+                if($("#phone_num").val() == "" || $("#country_idx").val() == ""){
+                    toastr.error("Check your mobile number.", 'Error', {
+                        "closeButton": true,
+                        "progressBar": false,
+                        "timeOut": "2000",
+                        "positionClass": "toast-bottom-center",
+                    });
+                    return false;
+                }
+    
+                if(confirm("Send verification code?")){
+                    $.post("send_proc", "mode=sms_send&sms_num="+$("#phone_num").val()+"&country_idx="+$("#country_idx").val(),
+                    function (response) {
+                        var jsonObj = response; //var jsonObj = JSON.parse(response);
+                        console.log("========== jsonObj ========== ");
+                        console.log(jsonObj);
+    
+                        if (jsonObj.result == true || jsonObj.result == "SUCCESS") {
+                            smsSendNumber = Base64.encode(jsonObj.data.chkNum);
+                        }
+                        else {
+                            if (jsonObj.message != undefined) {
+                                toastr.error("Sms send fail.", 'Error', {
+                                    "closeButton": true,
+                                    "progressBar": false,
+                                    "timeOut": "2000",
+                                    "positionClass": "toast-bottom-center",
+                                });
+                            }
+                        }
+    
+                    });
+                }
+            }
+    
+            function check_num(){
+    
+                if( $("#smsCode").val() == "" ){
+                    toastr.error("Please enter sms code.", 'Error', {
+                        "closeButton": true,
+                        "progressBar": false,
+                        "timeOut": "2000",
+                        "positionClass": "toast-bottom-center",
+                    });
+                    return false;
+                }
+    
+                if(Base64.encode($("#smsCode").val()) != smsSendNumber ) {
+                    toastr.error("Please check the sms code.", 'Error', {
+                        "closeButton": true,
+                        "progressBar": false,
+                        "timeOut": "2000",
+                        "positionClass": "toast-bottom-center",
+                    });
+                    return false;
+                }
+                return true;
+            }
+    
+            $(function () {
+                $("#frm1").validate({
+    
+                    debug: true,
+                    errorClass: "invalid",
+                    validClass: "success",
+    
+                    submitHandler: function (frm) {
+    
+                        if($("#chk").val() != "Y") {
+                            toastr.error("Please check the address to send the coin.", 'Error', {
+                                "closeButton": true,
+                                "progressBar": false,
+                                "timeOut": "2000",
+                                "positionClass": "toast-bottom-center",
+                            });
+                            return false;
+                        }
+    
+                        var min_trans_gmc = "1";
+                        if(parseFloat($("#amount").val()) < parseFloat(min_trans_gmc)) {
+                            toastr.error("Minimum transfer amount is "+min_trans_gmc+" GMC", 'Error', {
+                                "closeButton": true,
+                                "progressBar": false,
+                                "timeOut": "2000",
+                                "positionClass": "toast-bottom-center",
+                            });
+                            $("#amount").focus();
+                            return false;
+                        }
+    
+                        if(!check_num()){
+                            return false;
+                        }
+    
+                        frm.mode.value = 'send';
+                        frm.action = "send_proc";
+                        frm.output_type.value = "json"; // json, normal
+                        frm.is_dev.value = "N"; //
+    
+                        document.getElementById("btn_send").disabled = true;
+    
+                        // for real
+                        var formAll = $("#frm1").serialize();
+                        $.post(frm.action, formAll, function (response) {
+                            console.log("========== response ========== ");
+                            console.log(response);
+    
+                            var jsonObj = response; //var jsonObj = JSON.parse(response);
+                            console.log("========== jsonObj ========== ");
+                            console.log(jsonObj);
+    
+                            if (jsonObj.result == true || jsonObj.result == "SUCCESS") {
+    
+                                if (jsonObj.message != undefined) {
+    
+                                    toastr.info(jsonObj.message, 'Info', {
+                                        "closeButton": true,
+                                        "progressBar": false,
+                                        "timeOut": "2000",
+                                        "positionClass": "toast-top-center",
+                                    });
+                                }
+    
+                                if (jsonObj.gourl != undefined) {
+                                    if (jsonObj.gourl == "reload") {
+                                        location.reload();
+                                    }
+                                    else if (jsonObj.gourl.length > 0) {
+                                        location.href = jsonObj.gourl;
+                                    }
+                                }
+                            } else {
+    
+                                if (jsonObj.message != undefined) {
+                                    toastr.error(jsonObj.message, 'Error', {
+                                        "closeButton": true,
+                                        "progressBar": false,
+                                        "timeOut": "2000",
+                                        "positionClass": "toast-bottom-center",
+                                    });
+    
+                                }
+                                if (jsonObj.message != undefined) {
+                                    alert(jsonObj.message);
+                                }
+    
+                            }
+    
+                        });
+                    },
+                    rules: {
+                        toaddress: {
+                            required: true,
+                            minlength: 34,
+                            maxlength: 128,
+                        },
+                        amount: {
+                            required: true,
+                            minlength: 1,
+                            maxlength: 128,
+                        }
+                    },
+                    messages: {
+                        toaddress: {
+                            required: "주소를 입력하세요",
+                            minlength: "주소는 34자입니다"
+                        }
+                    }
+                });
+            })
+    
+            $(function(){
+                $("#chkAdrs").on("click", function(){
+    
+                    if($("#toaddress").val() == "") {
+                        alert("Please enter address.");
+                        $("#toaddress").focus();
+                        return false;
+                    }
+    
+                    $.post("send_proc", "mode=chk_address&toaddress="+$("#toaddress").val(), function (response) {
+                        console.log("========== response ========== ");
+                       //console.log(response);
+    
+                        var jsonObj = response; //var jsonObj = JSON.parse(response);
+                        console.log("========== jsonObj ========== ");
+                        console.log(jsonObj);
+    
+                        if (jsonObj.result == true || jsonObj.result == "SUCCESS") {
+                            var rtnCd = response.data.rtnCd;
+                            if(rtnCd == "Y") {
+                                toastr.info("Available", 'Info', {
+                                    "closeButton": true,
+                                    "progressBar": false,
+                                    "timeOut": "2000",
+                                    "positionClass": "toast-top-center",
+                                });
+                                $("#chk").val(rtnCd);
+                            } else {
+                                toastr.error("Unverifiable address", 'Error', {
+                                    "closeButton": true,
+                                    "progressBar": false,
+                                    "timeOut": "2000",
+                                    "positionClass": "toast-bottom-center",
+                                });
+                            }
+                        }
+                    });
+    
+                });
+            });
+    
+        </script>
+    
+        <!-- container -->
+        <div class="title_area">
+            <h1>전송</h1>
+        </div>
+    
+        <div class="tab_wrap">
+            <div class="tab_style_1">
+                <ul class="clfx">
+                    <li class="on"><a href="/send">GMC</a></li>
+                    <li><a href="/send_eth">ETH</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="send">
+            <div class="total_area">
+                <p>합계 <strong>GMC</strong></p>
+                <div class="number">0 GMC</div>
+            </div>
+    
+            <form name="frm1" id="frm1" class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="UTF-8" novalidate="novalidate">
+                <input type="hidden" name="mode" id="mode" value="send">
+                <input type="hidden" name="gourl" id="gourl" value="">
+                <input type="hidden" name="output_type" id="output_type" value="">
+                <input type="hidden" name="is_dev" id="is_dev" value="">
+                <input type="hidden" name="chk" id="chk" value="N">
+                <input type="hidden" name="coin_type" value="GMC">
+                <input type="hidden" name="phone_num" id="phone_num" value="01093089202">
+                <input type="hidden" name="country_idx" id="country_idx" value="82">
+    
+                <div class="container custom_input">
+                    <h2>Address</h2>
+                    <div class="add">
+                        <input type="text" placeholder="Address *" name="toaddress" id="toaddress">
+                        <div class="btn_area clfx">
+                            <button class="btn-gray-bg" id="chkAdrs">검증</button>
+                            <button class="btn-gray-bg" onclick="popup_open('.address_book_pop');fn_refresh_list();">주소록</button>
+                        </div>
+                    </div>
+                    <h2>Amount<sapn>(1일 : 50 GMC / 월 : 300 GMC 제한)</sapn></h2>
+                    <input type="text" placeholder="Amount *" name="amount" id="amount">
+                    <div class="agree_txt clfx">
+                        <div class="left_area">
+                            <p>전송가능 수량 : 5GMC(금월 총 전송수량: 125 GMC)</p>                
+                            <input type="checkbox" name="subtractfee" id="subtractfee" value="Y">
+                            <label for="agree">거래 수수료 포함
+                                <span>(체크박스를 체크하지 않으시면 위 금액외에 별도로 전송료가 부과 됩니다.)</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <h2>SMS authentication</h2>
+
+                                </div>
+            </form>
+        </div>
+        <!-- //container -->
+    <!-- 팝업 -->
+    <div class="popup_wrap address_book_pop">
+        <div class="popup">
+            <form name="frm4" id="frm4" class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+                <input type="hidden" name="mode" value="send_list">
+                <input type="hidden" name="gourl" value="">
+                <input type="hidden" name="output_type" value="">
+                <input type="hidden" name="is_dev" value="">
+                <input type="hidden" name="coin_type" value="GMC">
+            </form>
+            <div class="inner">
+                <form name="frm2" id="frm2" class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+                    <input type="hidden" name="mode" value="send_address">
+                    <input type="hidden" name="gourl" value="">
+                    <input type="hidden" name="output_type" value="json">
+                    <input type="hidden" name="is_dev" value="N">
+                    <input type="hidden" name="coin_type" value="GMC">
+                <div class="title_area">
+                    <h1>Address book</h1>
+                </div>
+                <div class="popup_cont">
+                    <h2>Search</h2>
+                    <div class="add_mb">
+                        <input type="text" placeholder="E-mail 또는 핸드폰 번호를 4자리 이상 입력해 주세요." name="schTxt" id="schTxt" onkeyup="addrSearch();" class="ui-autocomplete-input" autocomplete="off">
+                    </div>
+                    <div class="btn_area" style="margin-bottom:50px;">
+                        <input type="button" value="search" class="basic-btn01 btn-orange-bg" onclick="addrSearch();" id="addrSchBtn">
+                    </div>
+    
+                    <h2>Name</h2>
+                    <div class="add_mb"><input type="text" placeholder="Name *" name="name" id="name"></div>
+                    <h2>Address</h2>
+                    <div class="add_mb"><input type="text" placeholder="Wallet address *" name="walletaddress" id="walletaddress"></div>
+                    <div class="btn_area">
+                        <input type="button" value="Save" class="basic-btn01 btn-orange-bg" onclick="fn_add_row();" id="addrAddBtn">
+                        <input type="button" value="QRcode scan" class="basic-btn01 btn-orange-bg" onclick="addrSearch();" id="qrScanBtn" style="display:none;">
+                    </div>
+                </div>
+                </form>
+                <div class="add_list">
+                    <form name="frm3" id="frm3" class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+                        <input type="hidden" name="mode" value="send_delete">
+                        <input type="hidden" name="gourl" value="">
+                        <input type="hidden" name="output_type" value="json">
+                        <input type="hidden" name="is_dev" value="N">
+                        <input type="hidden" name="deleteNameVal" value="">
+                        <ul id="add_body">
+                        </ul>
+                    </form>
+                </div>
+                <div class="popup_close" onclick="popup_close('.address_book_pop');"><a href=""><img src="../img/popup_close.gif" alt="팝업닫기"></a></div>
+            </div>
+        </div>
+    </div>
+    <!-- //팝업 -->
+    <!-- footer -->
+    <div class="footer_wrap">
+        <div class="footer clfx">
+            <p>© 2018 Copyright by GemmyWorld</p>
+            <!--<div class="right_btn">
+                <a href="#">MAIL INQUIRY</a>
+                </div>
+            -->
+        </div>
+    </div>
+    <!-- //footer -->
+    
+    </div>
+    <!-- //wrap -->
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+    
+            $(".btn-copy2").each(function () {
+    
+                var n = "#" + $(this).attr('id');
+                var defval = $(this).attr('defval');
+                
+                new Clipboard(n).on('success', function (e) {
+    
+                    toastr.info(e.text, 'Copied', {
+                        "closeButton": true,
+                        "progressBar": false,
+                        "timeOut": "3000",
+                        "positionClass": "toast-bottom-right",
+                    });
+    
+                    $(e.trigger).attr('title', 'Copied').tooltip('show');
+    
+                }).on('error', function (e) {
+    
+                    console.error('Action:', e.action);
+                    console.error('Trigger:', e.trigger);
+                    window.prompt('Copy with Ctrl+C', defval);
+    
+                });
+    
+            });
+            
+            
+            $(".btn-copy3").each(function () {
+                
+                console.log(".btn-copy3");
+    
+                var n = "#" + $(this).attr('id');
+                var defval = $(this).attr('defval');
+    
+                new Clipboard(n).on('success', function (e) {
+    
+                    toastr.info(e.text, 'Copied', {
+                        "closeButton": true,
+                        "progressBar": false,
+                        "timeOut": "3000",
+                        "positionClass": "toast-bottom-right",
+                    });
+    
+                    $(e.trigger).attr('title', 'Copied').tooltip('show');
+    
+                }).on('error', function (e) {
+    
+                    console.error('Action:', e.action);
+                    console.error('Trigger:', e.trigger);
+                    window.prompt('Copy with Ctrl+C', defval);
+    
+                });
+    
+            });
+    
+        });
+    </script>
+    
+    
+    
+    <ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;"></ul><div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body>
+</html>
